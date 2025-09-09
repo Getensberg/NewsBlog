@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+// directUrl = env("DIRECT_URL")    // direct (без -pooler)
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")  // pooled (-pooler)
+  directUrl = env("DIRECT_URL")    // direct (без -pooler)
+}
+
+
+model NewsCategory {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+
+  news  News[]
+}
+
+model News {
+  id          Int          @id @default(autoincrement())
+  title       String
+  slug        String       @unique
+  content     String       @db.Text     // удобно хранить длинный текст/HTML
+  image       String?
+  draft       Boolean      @default(true)
+  isPinned    Boolean      @default(false)
+  pinnedAt    DateTime?
+  publishDate DateTime?
+
+  categoryId  Int?
+  category    NewsCategory? @relation(fields: [categoryId], references: [id])
+
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
