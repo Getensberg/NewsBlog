@@ -143,7 +143,7 @@ export default function AdminListClient({ items }: Props) {
                     <div className="flex items-center gap-2 min-w-0">
                       {p.isPinned && (
                         <span className="shrink-0 rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-900">
-                          PIN
+                          Pin
                         </span>
                       )}
                       <span className="block truncate font-medium text-gray-900">
@@ -205,7 +205,7 @@ export default function AdminListClient({ items }: Props) {
                               type="submit"
                               className="w-full text-left cursor-pointer"
                             >
-                              {p.isPinned ? "Pin" : "Unpin"}
+                              {p.isPinned ? "UnPin" : "Pin"}
                             </button>
                           </form>
                         </DropdownMenuItem>
