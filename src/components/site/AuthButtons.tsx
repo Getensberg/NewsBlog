@@ -17,7 +17,7 @@ export function AuthButtons({ session }: Props) {
     return (
       <Button
         onClick={() => signIn("discord")}
-        className="bg-[#5865F2] hover:bg-[#4752C4] text-white"
+        className="bg-[#5865F2] hover:bg-[#4752C4] text-white cursor-pointer"
         title="Log in Discord"
       >
         Connect
@@ -25,11 +25,11 @@ export function AuthButtons({ session }: Props) {
     );
   }
 
-  const name = session.user?.name ?? "Профиль";
+  const name = session.user?.name ?? "Profile";
   const initials = name.slice(0, 2).toUpperCase();
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 cursor-pointer">
       <Avatar className="h-9 w-9">
         <AvatarImage
           src={session.user?.image ?? ""}
@@ -43,6 +43,7 @@ export function AuthButtons({ session }: Props) {
         variant="outline"
         size="sm"
         onClick={() => signOut()}
+        className="cursor-pointer"
       >
         Log out
       </Button>
