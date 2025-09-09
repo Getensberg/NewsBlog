@@ -1,6 +1,9 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { prisma } from "@/lib/db";
+import { Button } from "@/components/ui/button";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -22,6 +25,22 @@ export default async function NewsPage({ params }: PageProps) {
 
   return (
     <article className="mx-auto max-w-6xl px-4">
+      {/* Кнопка Back */}
+      <div className="mb-6 flex justify-start">
+        <Button
+          asChild
+          variant="ghost"
+          size="sm"
+          className="flex items-center gap-2"
+        >
+          <Link href="/">
+            <ArrowLeft className="h-4 w-4" />
+            Back
+          </Link>
+        </Button>
+      </div>
+
+
       <div className="relative h-[550px] w-full overflow-hidden rounded-2xl shadow-md">
         {post.image ? (
           <Image
@@ -38,7 +57,7 @@ export default async function NewsPage({ params }: PageProps) {
         )}
       </div>
 
-      {/* Заголовок + чето */}
+      {/* Заголовок + инфо */}
       <header className="mt-6">
         <h1 className="text-3xl font-bold leading-tight">{post.title}</h1>
         <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-gray-600">
@@ -56,20 +75,15 @@ export default async function NewsPage({ params }: PageProps) {
         </div>
       </header>
 
-      {/* Контент: узкая колонка + защита от «выползаний» */}
+      {/* Контент */}
       <section className="mx-auto mt-8 w-full max-w-3xl">
         <div
           className={[
-            // типографика
             "prose prose-neutral max-w-none",
-            // перенос очень длинных слов/URL
             "break-words [overflow-wrap:anywhere]",
-            // не даём медиавставкам растягивать контейнер
             "prose-img:rounded-xl prose-img:max-w-full prose-img:h-auto",
             "prose-video:max-w-full",
-            // аккуратнее с преформатированным текстом
             "prose-pre:whitespace-pre-wrap prose-pre:break-words",
-            // таблицы не разъезжаются
             "prose-table:w-full prose-table:table-auto",
           ].join(" ")}
           dangerouslySetInnerHTML={{ __html: post.content || "" }}

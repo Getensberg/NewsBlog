@@ -10,6 +10,9 @@ import {
   deleteNews,
 } from "@/actions/news";
 import { ImageUploader } from "@/components/upload/ImageUploader";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
 
 type EditPost = {
   id: number;
@@ -196,12 +199,21 @@ export default function EditNewsForm({
           </p>
         )}
 
-        {/* Кнопка сохранить этой формы */}
-        <div className="flex justify-end">
-          <button className="cursor-pointer rounded bg-black px-4 py-2 text-white disabled:opacity-60">
-            Save
-          </button>
-        </div>
+          {/* Кнопка сохранить этой формы */}
+          <div className="mt-2 flex items-center justify-between">
+            {/* Кнопка "Назад в админку" */}
+            <Button asChild variant="outline" size="sm">
+              <Link href="/admin">Back to Admin</Link>
+            </Button>
+
+            {/* Кнопка сабмита */}
+            <button
+              className="cursor-pointer rounded bg-black px-4 py-2 text-white disabled:opacity-60"
+            >
+              Save
+            </button>
+          </div>
+
       </form>
 
       {/*  панель действий выпадающих кнопок */}

@@ -4,6 +4,8 @@ import { useActionState, useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { createNewsAction, type ActionState } from "@/actions/news";
 import { ImageUploader } from "@/components/upload/ImageUploader";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 type Category = { id: number; name: string };
 
@@ -165,10 +167,18 @@ export default function CreateNewsForm({ categories }: { categories: Category[] 
         </p>
       )}
 
-      {/* Кнопка сабмита (внутри формы, чтобы useFormStatus видел контекст) */}
-      <div className="flex justify-end">
+      {/* Кнопки внизу */}
+      <div className="flex justify-between">
+        {/* Кнопка "Назад в админку" */}
+        <Button asChild variant="outline" size="sm">
+          <Link href="/admin">Back to Admin</Link>
+        </Button>
+
+        {/* Кнопка сабмита */}
         <SubmitButton />
       </div>
+
+
     </form>
   );
 }
