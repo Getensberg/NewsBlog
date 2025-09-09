@@ -102,7 +102,7 @@ export default function AdminListClient({ items }: Props) {
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Поиск..."
+            placeholder="Search..."
             className="h-10 w-full rounded border px-3 outline-none focus:border-black sm:w-72"
           />
           <select

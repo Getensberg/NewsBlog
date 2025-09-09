@@ -33,7 +33,7 @@ export function PostCard({
             <Image src={image} alt={title} fill className="object-cover" priority />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-gray-200 text-gray-500">
-              Нет изображения
+              no image
             </div>
           )}
 

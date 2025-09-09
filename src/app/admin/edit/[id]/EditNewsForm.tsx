@@ -198,7 +198,7 @@ export default function EditNewsForm({
 
         {/* Кнопка сохранить этой формы */}
         <div className="flex justify-end">
-          <button className="rounded bg-black px-4 py-2 text-white disabled:opacity-60">
+          <button className="cursor-pointer rounded bg-black px-4 py-2 text-white disabled:opacity-60">
             Save
           </button>
         </div>
@@ -213,7 +213,7 @@ export default function EditNewsForm({
             type="submit"
             className="cursor-pointer rounded border px-3 py-2 text-sm hover:bg-gray-50"
           >
-            {post.isPinned ? "Открепить" : "Закрепить"}
+            {post.isPinned ? "Unpin" : "Pin"}
           </button>
         </form>
 
@@ -257,12 +257,7 @@ export default function EditNewsForm({
         </form>
       </div>
 
-      <p className="text-xs text-gray-500">
-        Подсказка: публикация через эти кнопки (как и в списке /admin) использует
-        <br />
-        **сохранённые** в базе данные. Если менял поля выше — нажми «Сохранить»,
-        затем «Опубликовать».
-      </p>
+
     </div>
   );
 }

@@ -33,7 +33,7 @@ export default async function NewsPage({ params }: PageProps) {
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gray-200 text-gray-500">
-            Нет изображения
+            No image
           </div>
         )}
       </div>
@@ -50,7 +50,7 @@ export default async function NewsPage({ params }: PageProps) {
           {publishLabel && <time>{publishLabel}</time>}
           {post.isPinned && (
             <span className="rounded bg-red-100 px-2 py-0.5 text-red-700">
-              Закреплено
+              Pinned
             </span>
           )}
         </div>

@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
@@ -10,18 +9,26 @@ export default async function Header() {
   const session = await getServerSession(authOptions);
 
   return (
-    <header className="border-b bg-white">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-        <nav className="flex items-center gap-4">
-          <Link href="/" className="font-semibold hover:opacity-90 transition">
+    <header className="sticky top-4 z-50 flex justify-center px-4">
+      <div className="mx-auto flex w-full max-w-4xl items-center justify-between rounded-2xl border bg-white/80 px-6 py-3 shadow-md backdrop-blur-sm dark:bg-neutral-900/80">
+        <nav className="flex items-center gap-6">
+          <Link
+            href="/"
+            className="font-semibold text-lg hover:text-primary transition-colors"
+          >
             News Blog
           </Link>
-          <Link href="/" className="text-sm text-gray-600 hover:underline">
+          <Link
+            href="/"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
             News
           </Link>
-          {/* Ссылку на админку можно показать только авторизованным */}
           {session && (
-            <Link href="/admin" className="text-sm text-gray-600 hover:underline">
+            <Link
+              href="/admin"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
               Admin
             </Link>
           )}

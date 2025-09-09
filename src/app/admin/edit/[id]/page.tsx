@@ -27,7 +27,7 @@ export default async function EditNewsPage({
 
   return (
     <div className="space-y-6 p-6">
-      <h1 className="text-2xl font-semibold">Редактирование</h1>
+      <h1 className="text-2xl font-semibold">Edit</h1>
 
       {/* Ошибка из query (?error=...) */}
       {error && (
@@ -39,7 +39,7 @@ export default async function EditNewsPage({
       {/* NEW: Сообщение об успехе (?ok=1, либо текст) */}
       {ok && (
         <div className="rounded border border-green-300 bg-green-50 p-3 text-sm text-green-700">
-          {ok === "1" ? "Опубликовано" : ok}
+          {ok === "1" ? "Published" : ok}
         </div>
       )}
 

@@ -16,7 +16,7 @@ function SubmitButton() {
       disabled={pending}
       className="inline-flex cursor-pointer items-center justify-center rounded bg-black px-4 py-2 text-white outline-none ring-offset-2 transition disabled:opacity-60 focus:ring-2"
     >
-      {pending ? "Сохраняю..." : "Создать черновик"}
+      {pending ? "Saving..." : "Create draft"}
     </button>
   );
 }
@@ -49,14 +49,14 @@ export default function CreateNewsForm({ categories }: { categories: Category[] 
       {/* Заголовок */}
       <div>
         <label htmlFor="title" className="block text-sm font-medium">
-          Заголовок *
+          Title *
         </label>
         <input
           id="title"
           name="title"
           required
           minLength={5}
-          placeholder="Напр. New features launch"
+          placeholder=""
           className="mt-1 w-full rounded border px-3 py-2 outline-none ring-offset-2 focus:ring-2"
           onChange={(e) => setTitleLen(e.currentTarget.value.trim().length)}
           aria-invalid={!!state?.errors?.title}
@@ -67,7 +67,7 @@ export default function CreateNewsForm({ categories }: { categories: Category[] 
             <p className="text-sm text-red-600">{state.errors.title[0]}</p>
           ) : (
             <span className="text-xs text-gray-500">
-              Только заголовок обязателен — остальное можно заполнить позже.
+              Only the title is required - the rest can be filled in later.
             </span>
           )}
           <span className="text-xs text-gray-500">{titleLen}/∞</span>
@@ -77,7 +77,7 @@ export default function CreateNewsForm({ categories }: { categories: Category[] 
       {/* Категория (опционально) */}
       <div>
         <label htmlFor="categoryId" className="block text-sm font-medium">
-          Категория (необязательно)
+          Category (optional)
         </label>
         <select
           id="categoryId"
@@ -86,7 +86,7 @@ export default function CreateNewsForm({ categories }: { categories: Category[] 
           className="mt-1 w-full rounded border px-3 py-2 outline-none ring-offset-2 focus:ring-2"
           aria-invalid={!!state?.errors?.categoryId}
         >
-          <option value="">— без категории —</option>
+          <option value="">— no category —</option>
           {categories.map((c) => (
             <option key={c.id} value={c.id}>
               {c.name}
@@ -101,12 +101,12 @@ export default function CreateNewsForm({ categories }: { categories: Category[] 
       {/* Контент (опционально) */}
       <div>
         <label htmlFor="content" className="block text-sm font-medium">
-          Контент (необязательно)
+          Content (optional)
         </label>
         <textarea
           id="content"
           name="content"
-          placeholder="Черновик можно сохранить пустым и вернуться позже"
+          placeholder="You can save the draft as blank and return to it later."
           className="mt-1 h-40 w-full resize-y rounded border px-3 py-2 outline-none ring-offset-2 focus:ring-2"
           onChange={(e) => setContentLen(e.currentTarget.value.trim().length)}
           aria-invalid={!!state?.errors?.content}
@@ -115,13 +115,13 @@ export default function CreateNewsForm({ categories }: { categories: Category[] 
           {state?.errors?.content && (
             <p className="text-sm text-red-600">{state.errors.content[0]}</p>
           )}
-          <span className="text-xs text-gray-500">{contentLen} символов</span>
+          <span className="text-xs text-gray-500">{contentLen} Symbols</span>
         </div>
       </div>
 
       {/* Изображение */}
       <div>
-        <label className="block text-sm font-medium">Изображение</label>
+        <label className="block text-sm font-medium">Image</label>
 
         {imageUrl ? (
           <div className="mt-2 flex items-center gap-3">
@@ -135,7 +135,7 @@ export default function CreateNewsForm({ categories }: { categories: Category[] 
               className="cursor-pointer text-sm text-red-600 underline"
               onClick={() => setImageUrl("")}
             >
-              Удалить
+              Delete
             </button>
           </div>
         ) : null}
@@ -155,7 +155,7 @@ export default function CreateNewsForm({ categories }: { categories: Category[] 
       {/* Закрепить */}
       <label className="inline-flex select-none items-center gap-2">
         <input type="checkbox" name="isPinned" />
-        <span className="text-sm">Закрепить</span>
+        <span className="text-sm">Pin</span>
       </label>
 
       {/* Сообщение от экшена */}
