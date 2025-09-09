@@ -1,16 +1,11 @@
 import { z } from "zod";
 
-/**
- * Универсальный парсер категории:
- * - undefined / пропущено  → undefined (не меняем поле в апдейте)
- * - ""                      → null (снять категорию)
- * - "12" или 12            → число > 0
- */
+
 const categoryIdLoose = z
   .any()
   .transform((v) => {
     if (v === undefined) return undefined; // поле не прислали
-    if (v === null || v === "") return null; // явное "без категории"
+    if (v === null || v === "") return null; // без категории
     const n = Number(v);
     return Number.isFinite(n) ? n : NaN;
   })
@@ -20,7 +15,7 @@ const categoryIdLoose = z
     "Некорректная категория"
   );
 
-/** Очень лояльная проверка URL (или пустая строка, чтобы очистить) */
+// проверка URL
 const imageField = z
   .string()
   .trim()
@@ -28,7 +23,7 @@ const imageField = z
   .or(z.literal(""))
   .optional();
 
-/** Создание: обязательен только title, остальное — опционально */
+// Создание: обязательен только title, остальное опционально
 export const createNewsSchema = z.object({
   title: z.string().trim().min(5, "Заголовок слишком короткий"),
   categoryId: categoryIdLoose.optional(), // undefined | null | number
@@ -40,7 +35,7 @@ export const createNewsSchema = z.object({
   image: imageField,
 });
 
-/** Обновление: всё опционально, поддерживаем снятие категории и очистку image */
+// Обновление, всё опционально поддерживаем снятие категории и очистку image
 export const updateNewsSchema = z.object({
   id: z.coerce.number().int().positive(),
   title: z.string().trim().min(5, "Заголовок слишком короткий").optional(),
@@ -53,7 +48,7 @@ export const updateNewsSchema = z.object({
   image: imageField,
 });
 
-/** Публикация: id обязателен, дату можем принять строкой */
+// Публикация: id обязателен, дату можем принять строкой
 export const publishNewsSchema = z.object({
   id: z.coerce.number().int().positive(),
   publishDate: z

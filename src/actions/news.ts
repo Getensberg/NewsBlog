@@ -36,7 +36,7 @@ function plainTextLength(html: string | undefined | null): number {
   return html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().length;
 }
 
-/* CREATE — как было */
+// CREATE
 export async function createNewsAction(
   _prev: ActionState | null,
   formData: FormData
@@ -92,7 +92,7 @@ export async function createNewsAction(
   return { ok: true, message: "Новость создана как черновик" };
 }
 
-/* EDIT / PUBLISH / UNPUBLISH — единый экшен */
+// EDIT / PUBLISH / UNPUBLISH - один акшен за всех (и все за него)
 export async function editNewsAction(
   _prev: ActionState | null,
   formData: FormData
@@ -115,10 +115,10 @@ export async function editNewsAction(
 const parsed = updateNewsSchema.safeParse({
   id: formData.get("id"),
   title: formData.get("title"),
-  categoryId: normCategoryId,        // ← нормализованное
+  categoryId: normCategoryId,
   content: formData.get("content"),
   isPinned: formData.get("isPinned") === "on",
-  image: normImage,                  // ← нормализованное
+  image: normImage,
 });
   if (!parsed.success) {
     return { ok: false, errors: parsed.error.flatten().fieldErrors };
@@ -127,7 +127,7 @@ const parsed = updateNewsSchema.safeParse({
   const {
     id,
     title,
-    categoryId,             // number | undefined | null (после схемы)
+    categoryId,             // number | undefined | null
     content,
     isPinned,
     image: imageUrl,         // string | "" | undefined
@@ -148,7 +148,7 @@ const parsed = updateNewsSchema.safeParse({
     return { ok: false, errors: { id: ["Новость не найдена"] } };
   }
 
-  // Посчитаем будущие значения из формы (ещё до апдейта)
+  // Посчитаем будущие значения из формы до апдейта
   const nextTitle = title ?? current.title;
   const nextSlug =
     title && title !== current.title ? await ensureUniqueSlug(title, id) : undefined;
@@ -156,11 +156,11 @@ const parsed = updateNewsSchema.safeParse({
   const nextContent = content !== undefined ? content : current.content;
 
   let nextCategoryId: number | null | undefined;
-  if (categoryId === undefined) nextCategoryId = current.categoryId; // не меняем
+  if (categoryId === undefined) nextCategoryId = current.categoryId;
   else nextCategoryId = categoryId; // может быть number или null
 
   let nextImage: string | null | undefined;
-  if (imageUrl === undefined) nextImage = current.image;      // не меняем
+  if (imageUrl === undefined) nextImage = current.image;
   else nextImage = imageUrl.length > 0 ? imageUrl : null;     // "" -> null, URL -> URL
 
   // Если нужно опубликовать — валидируем будущие значения

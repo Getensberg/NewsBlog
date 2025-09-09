@@ -1,4 +1,4 @@
-// src/app/admin/edit/[id]/page.tsx
+
 import { notFound } from "next/navigation";
 import { getNewsForEdit, getCategories } from "@/lib/queries";
 import EditNewsForm from "./EditNewsForm";
@@ -8,12 +8,12 @@ export default async function EditNewsPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ error?: string; ok?: string }>; // NEW: добавили ok
+  searchParams: Promise<{ error?: string; ok?: string }>;
 }) {
-  const { id: idStr } = await params; // обязательно await в app router
+  const { id: idStr } = await params;
   const sp = await searchParams;
   const error = sp?.error;
-  const ok = sp?.ok;                  // NEW: читаем ok
+  const ok = sp?.ok;
 
   const id = Number(idStr);
   if (!Number.isInteger(id)) notFound();

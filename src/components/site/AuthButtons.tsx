@@ -15,7 +15,7 @@ export function AuthButtons({ session }: Props) {
         className="rounded bg-[#5865F2] px-3 py-1.5 text-sm font-medium text-white"
         title="Войти через Discord"
       >
-        Войти с Discord
+        Connect
       </button>
     );
   }
@@ -41,7 +41,7 @@ export function AuthButtons({ session }: Props) {
         onClick={() => signOut()}
         className="rounded border px-3 py-1.5 text-sm"
       >
-        Выйти
+        Log out
       </button>
     </div>
   );

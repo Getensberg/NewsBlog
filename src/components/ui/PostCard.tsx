@@ -12,7 +12,6 @@ type PostCardProps = {
   isPinned: boolean;
   publishDate: string | null;
   image: string | null;
-  // делаем необязательными — в карточке не используются
   content?: string;
   pinnedAt?: string | null;
 };

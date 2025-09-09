@@ -38,7 +38,7 @@ export default function EditNewsForm({
     null
   );
 
-  // КОНТРОЛИРУЕМЫЕ ПОЛЯ — чтобы ничего не «сбрасывалось» визуально
+  // Контролируемые - чтобы ничего не сбрасывалось визуально
   const [title, setTitle] = useState(post.title);
   const [categoryId, setCategoryId] = useState<string>(
     post.categoryId != null ? String(post.categoryId) : ""
@@ -55,7 +55,7 @@ export default function EditNewsForm({
 
   return (
     <div className="mx-auto max-w-3xl space-y-6">
-      {/* ===== ФОРМА СОХРАНЕНИЯ (ТОЛЬКО ОНА) ===== */}
+      {/*  форма сохранения  */}
       <form id="edit-form" action={formAction} className="space-y-4">
         <input type="hidden" name="id" value={post.id} />
 
@@ -64,7 +64,7 @@ export default function EditNewsForm({
 
         {/* Заголовок */}
         <div>
-          <label className="block text-sm font-medium">Заголовок *</label>
+          <label className="block text-sm font-medium">Title *</label>
           <input
             name="title"
             value={title}
@@ -79,14 +79,14 @@ export default function EditNewsForm({
 
         {/* Категория */}
         <div>
-          <label className="block text-sm font-medium">Категория</label>
+          <label className="block text-sm font-medium">Category</label>
           <select
             name="categoryId"
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
             className="w-full rounded border p-2"
           >
-            <option value="">— без категории —</option>
+            <option value="">— no category —</option>
             {categories.map((c) => (
               <option key={c.id} value={String(c.id)}>
                 {c.name}
@@ -98,9 +98,9 @@ export default function EditNewsForm({
           )}
         </div>
 
-        {/* Изображение */}
+        {/* изображение */}
         <div className="space-y-2">
-          <label className="block text-sm font-medium">Изображение</label>
+          <label className="block text-sm font-medium">Image</label>
 
           {imageUrl ? (
             <div className="flex items-center gap-4">
@@ -113,7 +113,7 @@ export default function EditNewsForm({
               <span className="text-xs text-gray-600 break-all">{imageUrl}</span>
             </div>
           ) : (
-            <p className="text-xs text-gray-500">Изображение не выбрано</p>
+            <p className="text-xs text-gray-500">Choose image!</p>
           )}
 
           <div className={deleteImage ? "pointer-events-none opacity-50" : ""}>
@@ -131,7 +131,7 @@ export default function EditNewsForm({
               checked={deleteImage}
               onChange={(e) => setDeleteImage(e.target.checked)}
             />
-            <span className="text-sm">Удалить изображение</span>
+            <span className="text-sm">Delete image</span>
           </label>
 
           {state?.errors?.image && (
@@ -141,7 +141,7 @@ export default function EditNewsForm({
 
         {/* Контент */}
         <div>
-          <label className="block text-sm font-medium">Контент</label>
+          <label className="block text-sm font-medium">Content</label>
           <textarea
             name="content"
             value={content}
@@ -153,7 +153,7 @@ export default function EditNewsForm({
           )}
         </div>
 
-        {/* Закрепить */}
+        {/* закрепить */}
         <label className="inline-flex items-center gap-2">
           <input
             type="checkbox"
@@ -161,24 +161,24 @@ export default function EditNewsForm({
             checked={isPinned}
             onChange={(e) => setIsPinned(e.target.checked)}
           />
-          <span className="text-sm">Закрепить</span>
+          <span className="text-sm">Pin</span>
         </label>
 
-        {/* Статусы */}
+        {/* статусы */}
         <div className="text-xs text-gray-500 space-x-3">
           {!post.draft ? (
             <span>
-              Опубликовано:{" "}
+              Published:{" "}
               {post.publishDate
                 ? new Date(post.publishDate).toLocaleString("ru-RU")
                 : "—"}
             </span>
           ) : (
-            <span>Это черновик</span>
+            <span>Its draft</span>
           )}
           {post.isPinned && (
             <span>
-              Закреплено:{" "}
+              Pinned:{" "}
               {post.pinnedAt
                 ? new Date(post.pinnedAt).toLocaleString("ru-RU")
                 : "—"}
@@ -196,15 +196,15 @@ export default function EditNewsForm({
           </p>
         )}
 
-        {/* Кнопка «Сохранить» этой формы */}
+        {/* Кнопка сохранить этой формы */}
         <div className="flex justify-end">
           <button className="rounded bg-black px-4 py-2 text-white disabled:opacity-60">
-            Сохранить
+            Save
           </button>
         </div>
       </form>
 
-      {/* ===== ПАНЕЛЬ ДЕЙСТВИЙ, КАК В /admin (СОСЕДНИЕ ФОРМЫ) ===== */}
+      {/*  панель действий выпадающих кнопок */}
       <div className="flex flex-wrap items-center gap-2">
         {/* Закрепить / открепить */}
         <form action={togglePin}>
@@ -225,7 +225,7 @@ export default function EditNewsForm({
               type="submit"
               className="cursor-pointer rounded border px-3 py-2 text-sm hover:bg-gray-50"
             >
-              Опубликовать
+              Publish
             </button>
           </form>
         ) : (
@@ -235,7 +235,7 @@ export default function EditNewsForm({
               type="submit"
               className="cursor-pointer rounded border px-3 py-2 text-sm hover:bg-gray-50"
             >
-              В черновики
+              Move to draft
             </button>
           </form>
         )}
@@ -252,7 +252,7 @@ export default function EditNewsForm({
             type="submit"
             className="cursor-pointer rounded border border-red-300 px-3 py-2 text-sm text-red-600 hover:bg-red-50"
           >
-            Удалить
+            Delete
           </button>
         </form>
       </div>

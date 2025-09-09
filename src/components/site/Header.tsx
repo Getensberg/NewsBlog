@@ -17,12 +17,12 @@ export default async function Header() {
             News Blog
           </Link>
           <Link href="/" className="text-sm text-gray-600 hover:underline">
-            Лента
+            News
           </Link>
           {/* Ссылку на админку можно показать только авторизованным */}
           {session && (
             <Link href="/admin" className="text-sm text-gray-600 hover:underline">
-              Админка
+              Admin
             </Link>
           )}
         </nav>

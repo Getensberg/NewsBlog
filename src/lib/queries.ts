@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/db";
 import { toNewsDTO } from "@/lib/mappers";
 
-/** Публичная лента: опубликованные, с опциональным фильтром по имени категории */
+// Публичная лента - опубликованные, с опциональным фильтром по имени категории
 export async function getPublishedNews(categoryName?: string) {
   const rows = await prisma.news.findMany({
     where: {
@@ -21,7 +21,7 @@ export async function getPublishedNews(categoryName?: string) {
   return rows.map(toNewsDTO);
 }
 
-/** Категории (для фильтров и форм) */
+// Категории для фильтров и форм
 export async function getCategories() {
   return prisma.newsCategory.findMany({
     select: { id: true, name: true },
@@ -29,7 +29,7 @@ export async function getCategories() {
   });
 }
 
-/** Одна новость по slug (для /news/[slug]) */
+// Одна новость по slug для /news/[slug]
 export async function getNewsBySlug(slug: string) {
   return prisma.news.findUnique({
     where: { slug },
@@ -37,7 +37,7 @@ export async function getNewsBySlug(slug: string) {
   });
 }
 
-/** Черновики (для /admin) */
+// Черновики (для /admin)
 export async function getDraftNews() {
   return prisma.news.findMany({
     where: { draft: true },
@@ -46,7 +46,7 @@ export async function getDraftNews() {
   });
 }
 
-/** Все новости для админ-листа (если нужен общий список, не только черновики) */
+// Все новости для админ листа (если нужен общий список, не только черновики)
 export async function getAllNewsForAdmin() {
   return prisma.news.findMany({
     include: { category: true },
@@ -54,7 +54,7 @@ export async function getAllNewsForAdmin() {
   });
 }
 
-/** Пост для страницы редактирования (по id) */
+// Пост для страницы редактирования (по id)
 export async function getNewsForEdit(id: number) {
   if (!Number.isInteger(id)) return null;
 
@@ -69,7 +69,7 @@ export async function getNewsForEdit(id: number) {
       draft: true,
       publishDate: true,
       pinnedAt: true,
-      image: true,       // ← добавили
+      image: true,
     },
   });
 }

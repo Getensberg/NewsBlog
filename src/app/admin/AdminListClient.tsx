@@ -1,4 +1,4 @@
-// app/admin/AdminListClient.tsx
+
 "use client";
 
 import Link from "next/link";
@@ -84,7 +84,7 @@ export default function AdminListClient({ items }: Props) {
                 : "bg-white hover:bg-gray-50"
             }`}
           >
-            Опубликованные ({items.filter((i) => !i.draft).length})
+            Published ({items.filter((i) => !i.draft).length})
           </button>
           <button
             onClick={() => setTab("drafts")}
@@ -94,7 +94,7 @@ export default function AdminListClient({ items }: Props) {
                 : "bg-white hover:bg-gray-50"
             }`}
           >
-            Черновики ({items.filter((i) => i.draft).length})
+            Drafts ({items.filter((i) => i.draft).length})
           </button>
         </div>
 
@@ -162,9 +162,9 @@ export default function AdminListClient({ items }: Props) {
                 {/* Статус */}
                 <Td>
                   {p.draft ? (
-                    <Badge>Черновик</Badge>
+                    <Badge>Draft</Badge>
                   ) : (
-                    <Badge tone="green">Опубликовано</Badge>
+                    <Badge tone="green">Published</Badge>
                   )}
                 </Td>
 
@@ -185,7 +185,7 @@ export default function AdminListClient({ items }: Props) {
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="h-8 cursor-pointer">
-                          Действия
+                          Actions
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end" className="w-44">
@@ -194,7 +194,7 @@ export default function AdminListClient({ items }: Props) {
                             href={`/admin/edit/${p.id}`}
                             className="cursor-pointer"
                           >
-                            Редактировать
+                            Edit
                           </Link>
                         </DropdownMenuItem>
 
@@ -218,7 +218,7 @@ export default function AdminListClient({ items }: Props) {
                                 type="submit"
                                 className="w-full text-left cursor-pointer"
                               >
-                                Опубликовать
+                                Publish
                               </button>
                             </form>
                           </DropdownMenuItem>
@@ -230,7 +230,7 @@ export default function AdminListClient({ items }: Props) {
                                 type="submit"
                                 className="w-full text-left cursor-pointer"
                               >
-                                В черновики
+                                To draft
                               </button>
                             </form>
                           </DropdownMenuItem>
@@ -250,7 +250,7 @@ export default function AdminListClient({ items }: Props) {
                               type="submit"
                               className="w-full text-left cursor-pointer text-red-600"
                             >
-                              Удалить
+                              Delete
                             </button>
                           </form>
                         </DropdownMenuItem>
@@ -266,7 +266,7 @@ export default function AdminListClient({ items }: Props) {
 
       {filtered.length === 0 && (
         <div className="rounded-xl border bg-white p-8 text-center text-sm text-gray-500">
-          Ничего не найдено
+          nothing found
         </div>
       )}
     </div>

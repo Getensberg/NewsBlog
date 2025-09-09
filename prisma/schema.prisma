@@ -1,10 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-// directUrl = env("DIRECT_URL")    // direct (без -pooler)
 
 generator client {
   provider = "prisma-client-js"
@@ -14,8 +7,8 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("DATABASE_URL")  // pooled (-pooler)
-  directUrl = env("DIRECT_URL")    // direct (без -pooler)
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 
@@ -30,7 +23,7 @@ model News {
   id          Int          @id @default(autoincrement())
   title       String
   slug        String       @unique
-  content     String       @db.Text     // удобно хранить длинный текст/HTML
+  content     String       @db.Text
   image       String?
   draft       Boolean      @default(true)
   isPinned    Boolean      @default(false)

@@ -8,7 +8,7 @@ import { ImageUploader } from "@/components/upload/ImageUploader";
 type Category = { id: number; name: string };
 
 function SubmitButton() {
-  // важный момент: useFormStatus должен быть ВНУТРИ дерева <form>
+  // useFormStatus должен быть внутри <form>
   const { pending } = useFormStatus();
   return (
     <button
@@ -30,7 +30,7 @@ export default function CreateNewsForm({ categories }: { categories: Category[] 
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  // если экшен отработал успешно — сбросим форму и предпросмотр картинки
+  // если экшен отработал успешно - сбросим форму и предпросмотр картинки
   useEffect(() => {
     if (state?.ok) {
       formRef.current?.reset();
@@ -140,7 +140,7 @@ export default function CreateNewsForm({ categories }: { categories: Category[] 
           </div>
         ) : null}
 
-        {/* скрытое поле — уходит в FormData → в zod → в server action */}
+        {/* скрытое поле - уходит в FormData > в zod > в server action */}
         <input type="hidden" name="image" value={imageUrl} />
 
         <div className="mt-3">

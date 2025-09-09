@@ -15,7 +15,6 @@ export function ImageUploader({
       <UploadButton<OurFileRouter, "imageUploader">
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {
-          // serverData — это то, что вернули в onUploadComplete на сервере
           const fromServer = res?.[0]?.serverData as { url?: string } | undefined;
           const directUrl = res?.[0]?.url as string | undefined; // на всякий случай
           const url = fromServer?.url ?? directUrl;

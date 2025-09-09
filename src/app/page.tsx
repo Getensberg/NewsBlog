@@ -11,7 +11,7 @@ export default async function HomePage() {
       { publishDate: "desc" },
     ],
     include: { category: true },
-    // можно селектнуть только нужные поля, но include уже есть — ок
+    // можно селектнуть только нужные поля
   });
 
   const categories = await prisma.newsCategory.findMany({

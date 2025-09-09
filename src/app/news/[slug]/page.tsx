@@ -22,7 +22,6 @@ export default async function NewsPage({ params }: PageProps) {
 
   return (
     <article className="mx-auto max-w-6xl px-4">
-      {/* Обложка 950x~550 */}
       <div className="relative h-[550px] w-full overflow-hidden rounded-2xl shadow-md">
         {post.image ? (
           <Image
@@ -39,7 +38,7 @@ export default async function NewsPage({ params }: PageProps) {
         )}
       </div>
 
-      {/* Заголовок + мета */}
+      {/* Заголовок + чето */}
       <header className="mt-6">
         <h1 className="text-3xl font-bold leading-tight">{post.title}</h1>
         <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-gray-600">
@@ -73,7 +72,6 @@ export default async function NewsPage({ params }: PageProps) {
             // таблицы не разъезжаются
             "prose-table:w-full prose-table:table-auto",
           ].join(" ")}
-          // если нет @tailwindcss/typography — будет просто блоком; все «анти-выползательные» классы остаются
           dangerouslySetInnerHTML={{ __html: post.content || "" }}
         />
       </section>
