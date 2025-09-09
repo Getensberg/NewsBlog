@@ -74,7 +74,7 @@ export default function AdminListClient({ items }: Props) {
               tab === "all" ? "bg-black text-white" : "bg-white hover:bg-gray-50"
             }`}
           >
-            Все ({items.length})
+            All ({items.length})
           </button>
           <button
             onClick={() => setTab("published")}
@@ -112,7 +112,7 @@ export default function AdminListClient({ items }: Props) {
           >
             {categories.map((c) => (
               <option key={c} value={c}>
-                {c === "all" ? "Все категории" : c}
+                {c === "all" ? "All categories" : c}
               </option>
             ))}
           </select>
@@ -124,11 +124,11 @@ export default function AdminListClient({ items }: Props) {
         <table className="w-full table-fixed border-collapse text-sm">
           <thead>
             <tr className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-600">
-              <Th className="w-[40%]">Заголовок</Th>
-              <Th className="w-[16%]">Категория</Th>
-              <Th className="w-[16%]">Статус</Th>
-              <Th className="w-[16%]">Публикация</Th>
-              <Th className="w-[10%] text-right pr-0">Действия</Th>
+              <Th className="w-[40%]">Header</Th>
+              <Th className="w-[16%]">Caregory</Th>
+              <Th className="w-[16%]">Status</Th>
+              <Th className="w-[16%]">Post</Th>
+              <Th className="w-[10%] text-right pr-0">Actions</Th>
             </tr>
           </thead>
           <tbody>
@@ -205,7 +205,7 @@ export default function AdminListClient({ items }: Props) {
                               type="submit"
                               className="w-full text-left cursor-pointer"
                             >
-                              {p.isPinned ? "Открепить" : "Закрепить"}
+                              {p.isPinned ? "Pin" : "Unpin"}
                             </button>
                           </form>
                         </DropdownMenuItem>
@@ -241,7 +241,7 @@ export default function AdminListClient({ items }: Props) {
                             action={deleteNews}
                             className="w-full"
                             onSubmit={(e) => {
-                              if (!confirm("Точно удалить новость?"))
+                              if (!confirm("Are u sure?"))
                                 e.preventDefault();
                             }}
                           >
