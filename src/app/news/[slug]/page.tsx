@@ -28,7 +28,7 @@ export default async function NewsPage({ params }: PageProps) {
             src={post.image}
             alt={post.title}
             fill
-            className="object-contain"
+            className="object-cover"
             priority
           />
         ) : (
